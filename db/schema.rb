@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_21_221752) do
+ActiveRecord::Schema.define(version: 2020_04_10_002237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,27 +18,23 @@ ActiveRecord::Schema.define(version: 2020_03_21_221752) do
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "body"
-    t.bigint "user_id", null: false
-    t.bigint "topic_id", null: false
+    t.bigint "topic_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["topic_id"], name: "index_posts_on_topic_id"
-    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "replies", force: :cascade do |t|
     t.text "body"
-    t.bigint "user_id", null: false
     t.bigint "post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["post_id"], name: "index_replies_on_post_id"
-    t.index ["user_id"], name: "index_replies_on_user_id"
   end
 
   create_table "topics", force: :cascade do |t|
     t.string "title"
-    t.text "description"
+    t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -55,8 +51,5 @@ ActiveRecord::Schema.define(version: 2020_03_21_221752) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "posts", "topics"
-  add_foreign_key "posts", "users"
   add_foreign_key "replies", "posts"
-  add_foreign_key "replies", "users"
 end
