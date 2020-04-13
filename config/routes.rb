@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  resources :replies, :except => [:index]
-  resources :posts
-  resources :topics
+  resources :topics do
+    resources :posts, :except => [:index] do
+      resources :replies, :except => [:index]
+    end
+  end
   devise_for :users
   root "topics#index"
   # get "replies/" => redirect("topics#index")

@@ -1,4 +1,4 @@
 class Post < ApplicationRecord
-  belongs_to :topic, :optional => true
-  has_many :replys
+  belongs_to :topic
+  has_many :replies, :dependent => :destroy
 end

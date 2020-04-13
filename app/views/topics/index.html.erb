@@ -42,6 +42,11 @@ td {text-align:center;}
 <br>
 
 <%= link_to 'New Topic', new_topic_path %>
+<% if user_signed_in? %>
+  <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+<% elsif %>
+  <%= link_to 'Login', new_user_session_path %>
+<%end%>
 
 </body>
 </html>
